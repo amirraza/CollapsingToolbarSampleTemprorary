@@ -13,13 +13,8 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,21 +22,17 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by AmirRaza on 7/5/2015.
+ * Created by AmirRaza on 7/6/2015.
  */
-public class AllAppsFragment extends Fragment {
-    List<String> arr = new ArrayList<>();
+public class UserAppsFragment extends Fragment {
     private PackageManager packageManager = null;
     private List<ApplicationInfo> applist = null;
     private ApplicationInfo[] mAppInfo;
 
-    public AllAppsFragment() {
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        arr.add("Item");arr.add("Item");arr.add("Item");arr.add("Item");arr.add("Item");
         packageManager = getActivity().getPackageManager();
         applist = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         mAppInfo = applist.toArray(new ApplicationInfo[applist.size()]);
@@ -52,7 +43,7 @@ public class AllAppsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
-                R.layout.fragment_all_apps, container, false);
+                R.layout.fragment_user_apps, container, false);
         setupRecyclerView(rv);
         return rv;
 
@@ -122,19 +113,25 @@ public class AllAppsFragment extends Fragment {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mBoundString = mValues.get(position);
-            holder.title = (String) mValues.get(position).loadLabel(context.getPackageManager());
-            holder.mTextView.setText(mValues.get(position).loadLabel(context.getPackageManager()));
-            holder.mImageView.setBackgroundDrawable(mValues.get(position).loadIcon(context.getPackageManager()));
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, CheeseDetailActivity.class);
-                    intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.title);
+            if(mValues.get(position).publicSourceDir.contains("/system/")){
 
-                    context.startActivity(intent);
-                }
-            });
+            }
+            else{
+                holder.title = (String) mValues.get(position).loadLabel(context.getPackageManager());
+                holder.mTextView.setText(mValues.get(position).loadLabel(context.getPackageManager()));
+                holder.mImageView.setBackgroundDrawable(mValues.get(position).loadIcon(context.getPackageManager()));
+                holder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, CheeseDetailActivity.class);
+                        intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.title);
+
+                        context.startActivity(intent);
+                    }
+                });
+            }
+
 
 //            Glide.with(holder.mImageView.getContext())
 //                    .load(Cheeses.getRandomCheeseDrawable())

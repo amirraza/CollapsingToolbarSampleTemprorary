@@ -33,8 +33,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    NavigationView navigationView;
-    CircleImageView amirProfileImage, azizProfileImage;
+//    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,43 +42,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
-        systemBarTintManager.setStatusBarTintEnabled(true);
-        systemBarTintManager.setTintColor(Color.parseColor("#60000000"));
-
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        amirProfileImage = (CircleImageView) findViewById(R.id.amirProfileImage);
-        azizProfileImage = (CircleImageView) findViewById(R.id.azizProfileImage);
-
-        amirProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.slide_down,R.anim.slide_up,R.anim.slide_down,R.anim.slide_up)
-                        .add(R.id.nav_view, new Amir())
-                        .addToBackStack(null).commit();
-            }
-        });
-
-        azizProfileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.slide_up,R.anim.slide_up,R.anim.slide_down,R.anim.slide_down)
-                        .add(R.id.nav_view,new Aziz())
-                        .addToBackStack(null).commit();
-            }
-        });
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
+///        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        if (navigationView != null) {
+//            setupDrawerContent(navigationView);
+//        }
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -118,22 +90,23 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new AllAppsFragment(), "All");
-        adapter.addFragment(new CheeseListFragment(), "System");
-        adapter.addFragment(new CheeseListFragment(), "User");
+        adapter.addFragment(new UserAppsFragment(), "User");
+        adapter.addFragment(new SystemAppsFragment(), "System");
+        adapter.addFragment(new SystemAppsFragment(), "Apk");
         viewPager.setAdapter(adapter);
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
-    }
+//    private void setupDrawerContent(NavigationView navigationView) {
+//        navigationView.setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        menuItem.setChecked(true);
+//                        mDrawerLayout.closeDrawers();
+//                        return true;
+//                    }
+//                });
+//    }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
