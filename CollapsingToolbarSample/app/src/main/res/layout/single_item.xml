@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/single_item_bg">
+
+
+
+        <ImageView
+            android:id="@+id/appImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/a" />
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/appImage"
+            android:layout_toLeftOf="@+id/appSize"
+            android:layout_toRightOf="@+id/appImage"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:text="asdfasdf"
+            android:textColor="#000000"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/packageName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/appImage"
+            android:layout_below="@+id/appName"
+            android:layout_toLeftOf="@+id/appSize"
+            android:layout_toRightOf="@+id/appImage"
+            android:layout_toStartOf="@+id/appSize"
+            android:gravity="bottom"
+            android:singleLine="true"
+            android:text="asdfasdf" />
+
+        <TextView
+            android:id="@+id/appSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/appImage"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:text="45kb" />
+    </RelativeLayout>
+</RelativeLayout>
