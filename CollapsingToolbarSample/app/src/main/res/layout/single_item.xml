@@ -17,7 +17,9 @@
             android:id="@+id/appImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="8dp"
             android:src="@drawable/a" />
 
         <TextView
@@ -29,6 +31,7 @@
             android:layout_toRightOf="@+id/appImage"
             android:paddingTop="5dp"
             android:singleLine="true"
+            android:layout_marginLeft="10dp"
             android:text="asdfasdf"
             android:textColor="#000000"
             android:textSize="17sp" />
@@ -44,15 +47,25 @@
             android:layout_toStartOf="@+id/appSize"
             android:gravity="bottom"
             android:singleLine="true"
+            android:layout_marginLeft="10dp"
             android:text="asdfasdf" />
 
         <TextView
             android:id="@+id/appSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/appImage"
+            android:padding="10dp"
+            android:text="45kb"
+            android:layout_alignTop="@+id/myPopUpButton"
+            android:layout_toLeftOf="@+id/myPopUpButton"
+            android:layout_toStartOf="@+id/myPopUpButton" />
+        <ImageView
+            android:id="@+id/myPopUpButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/popup_icon"
+            android:layout_alignTop="@+id/appName"
             android:layout_alignParentRight="true"
-            android:padding="15dp"
-            android:text="45kb" />
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </RelativeLayout>

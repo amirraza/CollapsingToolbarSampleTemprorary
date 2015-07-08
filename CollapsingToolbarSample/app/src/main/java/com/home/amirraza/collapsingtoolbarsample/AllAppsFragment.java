@@ -14,14 +14,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -101,6 +105,26 @@ public class AllAppsFragment extends Fragment {
             ImageView appImage = (ImageView) convertView.findViewById(R.id.appImage);
             appImage.setImageDrawable(icons[position]);
 
+            ImageView popupImage = (ImageView) convertView.findViewById(R.id.myPopUpButton);
+            popupImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    PopupMenu popupMenu = new PopupMenu(getActivity(),view);
+                    popupMenu.getMenuInflater().inflate(R.menu.my_popup_menu, popupMenu.getMenu());
+                    popupMenu.show();
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            switch (menuItem.getItemId()){
+                                case R.id.extract:
+                                    Toast.makeText(getActivity(),"Clicked "+menuItem.getTitle(),Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                }
+            });
             return convertView;
         }
     }
