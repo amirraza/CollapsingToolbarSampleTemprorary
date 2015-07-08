@@ -1,7 +1,9 @@
 package com.home.amirraza.collapsingtoolbarsample;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -22,13 +25,18 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
 
+    public static String AppName, PackageName;
+    public static Drawable AppImage;
+    private ApplicationInfo applicaionInfo;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
-        final String cheeseName = intent.getStringExtra(EXTRA_NAME);
+        applicaionInfo = intent.getParcelableExtra("Name");
+
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,7 +49,34 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(cheeseName);
+        collapsingToolbar.setTitle(applicaionInfo.loadLabel(getPackageManager()));
+
+        TextView pkg = (TextView) findViewById(R.id.detailPackageName);
+        pkg.setText(
+                "Label\n " + applicaionInfo.loadLabel(getPackageManager()) +
+                        "permission\n" + applicaionInfo.permission +
+                        "icon\n" + applicaionInfo.loadIcon(getPackageManager()) +
+                        "backupAgentName " + applicaionInfo.backupAgentName +
+                        "dataDir " + applicaionInfo.dataDir +
+                        "manageSpaceActivityName " + applicaionInfo.manageSpaceActivityName +
+                        "nativeLibraryDir " + applicaionInfo.nativeLibraryDir +
+                        "className " + applicaionInfo.className +
+                        "processName " + applicaionInfo.processName +
+                        "publicSourceDir " + applicaionInfo.publicSourceDir +
+                        "sourceDir " + applicaionInfo.sourceDir +
+                        "taskAffinity " + applicaionInfo.taskAffinity +
+                        "name " + applicaionInfo.name +
+                        "describeContents() " + applicaionInfo.describeContents() +
+                        "descriptionRes " + applicaionInfo.descriptionRes +
+                        "compatibleWidthLimitDp " + applicaionInfo.compatibleWidthLimitDp +
+                        "nonLocalizableLabel " + applicaionInfo.nonLocalizedLabel +
+                        "sharedLibraryFiles " + applicaionInfo.sharedLibraryFiles +
+                        "uid " + applicaionInfo.uid
+        );
+
+        TextView detail = (TextView) findViewById(R.id.detailDetails);
+        detail.setText( applicaionInfo.packageName);
+
 
         loadBackdrop();
     }
@@ -58,7 +93,7 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-        Glide.with(this).load(R.drawable.waaaa).centerCrop().into(imageView);
+        Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
     }
 
     @Override

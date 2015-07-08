@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:orientation="vertical"
-        android:background="@drawable/bg"
+        android:background="@drawable/wa"
         android:id="@+id/drawer_profile_bg">
 
         <de.hdodenhof.circleimageview.CircleImageView

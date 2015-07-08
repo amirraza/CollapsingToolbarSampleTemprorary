@@ -9,18 +9,24 @@ public class Cheeses {
     private static final Random RANDOM = new Random();
 
     public static int getRandomCheeseDrawable() {
-        switch (RANDOM.nextInt(5)) {
+        switch (RANDOM.nextInt(8)) {
             default:
             case 0:
-                return R.drawable.cheese_1;
+                return R.drawable.list_bg;
             case 1:
-                return R.drawable.cheese_2;
+                return R.drawable.wall;
             case 2:
-                return R.drawable.cheese_3;
+                return R.drawable.a;
             case 3:
-                return R.drawable.cheese_4;
+                return R.drawable.w;
             case 4:
-                return R.drawable.cheese_5;
+                return R.drawable.wa;
+            case 5:
+                return R.drawable.waa;
+            case 6:
+                return R.drawable.waaa;
+            case 7:
+                return R.drawable.waaaa;
         }
     }
 

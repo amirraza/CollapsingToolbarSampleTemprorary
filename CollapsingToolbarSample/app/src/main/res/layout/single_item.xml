@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
         android:background="@drawable/single_item_bg">
 
 
@@ -54,18 +51,19 @@
             android:id="@+id/appSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="45kb"
-            android:layout_alignTop="@+id/myPopUpButton"
-            android:layout_toLeftOf="@+id/myPopUpButton"
-            android:layout_toStartOf="@+id/myPopUpButton" />
+            android:text="54545kb"
+            android:layout_marginRight="9dp"
+            android:layout_below="@+id/appName"
+            android:layout_alignRight="@+id/myPopUpButton"
+            android:layout_alignEnd="@+id/myPopUpButton" />
         <ImageView
             android:id="@+id/myPopUpButton"
-            android:layout_width="20dp"
+            android:layout_width="30dp"
             android:layout_height="20dp"
-            android:background="@drawable/popup_icon"
+            android:src="@drawable/popup_icon"
+            android:paddingLeft="6dp"
             android:layout_alignTop="@+id/appName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
-</RelativeLayout>
+</android.support.v7.widget.CardView>
