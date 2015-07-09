@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+//import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
  * Created by AmirRaza on 7/4/2015.
@@ -41,9 +41,9 @@ public class CheeseDetailActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
-        systemBarTintManager.setStatusBarTintEnabled(true);
-        systemBarTintManager.setTintColor(Color.parseColor("#60000000"));
+//        SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
+//        systemBarTintManager.setStatusBarTintEnabled(true);
+//        systemBarTintManager.setTintColor(Color.parseColor("#60000000"));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

@@ -1,8 +1,13 @@
-package com.home.amirraza.collapsingtoolbarsample;
+package com.home.amirraza.collapsingtoolbarsample.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.home.amirraza.collapsingtoolbarsample.AllAppsFragment;
+import com.home.amirraza.collapsingtoolbarsample.ApkFragment;
+import com.home.amirraza.collapsingtoolbarsample.SystemAppsFragment;
+import com.home.amirraza.collapsingtoolbarsample.UserAppsFragment;
 
 /**
  * Created by Amir on 7/8/2015.
