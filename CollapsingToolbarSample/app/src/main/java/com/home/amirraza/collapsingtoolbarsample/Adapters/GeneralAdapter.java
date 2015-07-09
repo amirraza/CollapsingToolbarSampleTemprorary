@@ -1,4 +1,4 @@
-package com.home.amirraza.collapsingtoolbarsample;
+package com.home.amirraza.collapsingtoolbarsample.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.home.amirraza.collapsingtoolbarsample.CheeseDetailActivity;
+import com.home.amirraza.collapsingtoolbarsample.R;
 
 /**
  * Created by Amir on 7/8/2015.

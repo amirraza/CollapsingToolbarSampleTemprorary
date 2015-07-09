@@ -3,12 +3,13 @@ package com.home.amirraza.collapsingtoolbarsample;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import com.home.amirraza.collapsingtoolbarsample.Adapters.GeneralAdapter;
 
 import java.util.List;
 
