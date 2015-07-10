@@ -21,16 +21,26 @@ public class FileUtils {
     Context mContext;
     Formatter formatter;
     ExtractUtils extractUtils;
+    public static FileUtils fileUtils;
+
+    public FileUtils(){}
 
     public FileUtils(Context context) {
         mContext = context;
         extractUtils = new ExtractUtils();
     }
 
+    public static FileUtils getInstance(Context context){
+        if(fileUtils == null)
+            fileUtils = new FileUtils(context);
+        return fileUtils;
+    }
+
+
     public void extract(int i, ApplicationInfo[] mAppInfo) {
         ProgressDialog dialog = ProgressDialog.show(mContext, "Extracting...", "Please wait", true, true);
         File appFile = new File(mAppInfo[i].sourceDir);
-        String PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme Apk Editor/";
+        String PATH = Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/";
         File newDirectory = new File(PATH + "/APKs/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
         newDirectory.mkdirs();
         File newLocation = new File(newDirectory, "app.apk");

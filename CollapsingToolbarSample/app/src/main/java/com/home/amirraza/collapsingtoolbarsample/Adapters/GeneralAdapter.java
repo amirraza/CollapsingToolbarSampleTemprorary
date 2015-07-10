@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import com.home.amirraza.collapsingtoolbarsample.CheeseDetailActivity;
 import com.home.amirraza.collapsingtoolbarsample.R;
+import com.home.amirraza.collapsingtoolbarsample.Utils.FileUtils;
+
+import java.io.File;
 
 /**
  * Created by Amir on 7/8/2015.
@@ -75,6 +78,7 @@ public class GeneralAdapter extends BaseAdapter {
                         switch (menuItem.getItemId()){
                             case R.id.extract:
                                 Toast.makeText(context, "Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                                FileUtils.getInstance(context).extract(position, applicationInfo);
                                 break;
                         }
                         return false;
