@@ -2,6 +2,7 @@ package com.home.amirraza.collapsingtoolbarsample;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import java.util.List;
 //import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
@@ -28,6 +31,7 @@ public class CheeseDetailActivity extends AppCompatActivity {
     public static String AppName, PackageName;
     public static Drawable AppImage;
     private ApplicationInfo applicaionInfo;
+    String[] t;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         applicaionInfo = intent.getParcelableExtra("Name");
-
+t=intent.getStringArrayExtra("lis");
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,6 +57,8 @@ public class CheeseDetailActivity extends AppCompatActivity {
 
         TextView pkg = (TextView) findViewById(R.id.detailPackageName);
         pkg.setText(
+                t+" \n\n"+
+
                 "Label\n " + applicaionInfo.loadLabel(getPackageManager()) +
                         "permission\n" + applicaionInfo.permission +
                         "icon\n" + applicaionInfo.loadIcon(getPackageManager()) +

@@ -3,12 +3,19 @@ package com.home.amirraza.collapsingtoolbarsample.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageStats;
+import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +25,9 @@ import com.home.amirraza.collapsingtoolbarsample.R;
 import com.home.amirraza.collapsingtoolbarsample.Utils.FileUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Amir on 7/8/2015.
@@ -26,6 +36,7 @@ public class GeneralAdapter extends BaseAdapter {
 
     Context context;
     ApplicationInfo applicationInfo[];
+    List<PackageInfo> temList;
     public GeneralAdapter(Context context, ApplicationInfo[] applicationInfo) {
         this.context = context;
         this.applicationInfo = applicationInfo;
@@ -58,9 +69,20 @@ public class GeneralAdapter extends BaseAdapter {
 
         final TextView packageName = (TextView) convertView.findViewById(R.id.packageName);
         packageName.setText(applicationInfo[position].packageName);
+        PackageStats stats = new PackageStats(applicationInfo[position].sourceDir+"/"+applicationInfo[position].packageName);
+
 
         TextView appSize = (TextView) convertView.findViewById(R.id.appSize);
-//            appSize.setText(this.appSize[position] / (1024) + "Mb");
+        float[] apppSize=null;
+        long fileSize=0;
+        try {
+             fileSize = new FileInputStream(applicationInfo[position].sourceDir).getChannel().size();
+             apppSize = new float[1];
+            apppSize[0] = fileSize;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        appSize.setText(stats.codeSize+" "+stats.dataSize+ "Mb");
 
         ImageView appImage = (ImageView) convertView.findViewById(R.id.appImage);
         appImage.setImageDrawable(applicationInfo[position].loadIcon(context.getPackageManager()));
@@ -77,8 +99,7 @@ public class GeneralAdapter extends BaseAdapter {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.extract:
-                                Toast.makeText(context, "Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                                FileUtils.getInstance(context).extract(position, applicationInfo);
+                                FileUtils.getInstance(context).extract(position, applicationInfo,view);
                                 break;
                         }
                         return false;
@@ -90,6 +111,9 @@ public class GeneralAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CheeseDetailActivity.class);
+//                temList = context.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS);
+//                String[] myListArray = temList.toArray(new String[temList.size()]);
+//                Log.d("TAG", "" + temList);
                 intent.putExtra("Name",applicationInfo[position]);
                 context.startActivity(intent);
             }

@@ -2,12 +2,14 @@ package com.home.amirraza.collapsingtoolbarsample;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.home.amirraza.collapsingtoolbarsample.Adapters.GeneralAdapter;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class MyBackgroundTask extends AsyncTask<String, String, String> {
     private PackageManager packageManager = null;
     private List<ApplicationInfo> applist = null;
+    private List<PackageInfo> temList=null;
     private ApplicationInfo[] mAppInfo, tempAppInfo;
     private Context context;
     private ProgressBar progressBar;
@@ -36,6 +39,7 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
     public String doInBackground(String... params) {
         packageManager = context.getPackageManager();
         applist = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
+
         mAppInfo = applist.toArray(new ApplicationInfo[applist.size()]);
 
         if (fragmentNumber == 1) {

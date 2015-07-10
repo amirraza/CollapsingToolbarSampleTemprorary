@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -37,7 +39,7 @@ public class FileUtils {
     }
 
 
-    public void extract(int i, ApplicationInfo[] mAppInfo) {
+    public void extract(int i, ApplicationInfo[] mAppInfo, View snackBarView) {
         ProgressDialog dialog = ProgressDialog.show(mContext, "Extracting...", "Please wait", true, true);
         File appFile = new File(mAppInfo[i].sourceDir);
         String PATH = Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/";
@@ -60,8 +62,8 @@ public class FileUtils {
             e.printStackTrace();
         }
         dialog.dismiss();
-
-        Toast.makeText(mContext, " " + newLocation.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        Snackbar.make(snackBarView,newLocation.getAbsolutePath(),Snackbar.LENGTH_LONG).setAction("Action", null).show();
+//        Toast.makeText(mContext, " " + newLocation.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
 
 
