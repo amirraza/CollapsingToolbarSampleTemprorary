@@ -149,22 +149,12 @@
     </android.support.v4.widget.NestedScrollView>
 
 
-
-    <android.support.design.widget.FloatingActionButton
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    app:layout_anchor="@id/appbar"
-    app:layout_anchorGravity="bottom|right|end"
-    android:src="@drawable/ic_discuss"
-    android:layout_margin="@dimen/fab_margin"
-    android:clickable="true"/>
-
-
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginEnd="0dp"
         fab:fab_addButtonColorNormal="@color/white"
         fab:fab_addButtonColorPressed="@color/white_pressed"
         fab:fab_addButtonPlusIconColor="@color/half_black"
@@ -190,5 +180,16 @@
             fab:fab_colorPressed="@color/white_pressed"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+    <android.support.design.widget.FloatingActionButton
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:layout_anchor="@id/appbar"
+    app:layout_anchorGravity="bottom|right|end"
+    android:src="@drawable/ic_discuss"
+    android:layout_margin="16dp"
+    android:clickable="true"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

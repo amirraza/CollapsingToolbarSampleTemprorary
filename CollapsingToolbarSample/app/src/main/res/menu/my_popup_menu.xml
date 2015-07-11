@@ -5,7 +5,7 @@
         android:title="Extract" />
     <item
         android:id="@+id/copy"
-        android:title="Copy" />
+        android:title="Get Apk" />
     <item
         android:id="@+id/share"
         android:title="Share" />
