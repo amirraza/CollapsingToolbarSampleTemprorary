@@ -6,6 +6,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -64,8 +65,9 @@ public class GeneralAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.single_item, null, false);
         }
 
-        TextView appName = (TextView) convertView.findViewById(R.id.appName);
-        appName.setText(applicationInfo[position].loadLabel(context.getPackageManager()));
+        final TextView appName = (TextView) convertView.findViewById(R.id.appName);
+        final String appNameString = (String) applicationInfo[position].loadLabel(context.getPackageManager());
+        appName.setText(appNameString);
 
         final TextView packageName = (TextView) convertView.findViewById(R.id.packageName);
         packageName.setText(applicationInfo[position].packageName);
@@ -99,7 +101,22 @@ public class GeneralAdapter extends BaseAdapter {
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.extract:
-                                FileUtils.getInstance(context).extract(position, applicationInfo,view);
+                                FileUtils.getInstance(context).extract(position, applicationInfo, view);
+                                break;
+                            case R.id.share:
+                                FileUtils.getInstance(context).share(new File(applicationInfo[position].publicSourceDir));
+                                break;
+                            case R.id.uninstall:
+                                FileUtils.getInstance(context).getInfo(applicationInfo[position].packageName);
+                                break;
+                            case R.id.copy:
+                                try {
+                                    FileUtils.getInstance(context).copy(new File(applicationInfo[position].sourceDir),
+                                            new File(Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/APKs/"
+                                                    +appNameString,appNameString+".apk"));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 break;
                         }
                         return false;

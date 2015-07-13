@@ -2,7 +2,9 @@ package com.home.amirraza.collapsingtoolbarsample.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -38,7 +40,27 @@ public class FileUtils {
         return fileUtils;
     }
 
+    public void share(File source ){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("application/zip");
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(source));
+        Intent.createChooser(intent, "Share");
+        mContext.startActivity(intent);
+    }
 
+    public void getInfo(String packageName){
+        Intent intent = new Intent();
+        intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+        Uri uri = Uri.fromParts("package", packageName, null);
+        intent.setData(uri);
+//            Uri packageName = Uri.parse(mAppInfo[i].packageName);
+//            intent.setData(packageName);
+//            intent.putExtra("package",mAppInfo[i].packageName);
+//            intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+            mContext.startActivity(intent);
+        }
+    }
     public void extract(int i, ApplicationInfo[] mAppInfo, View snackBarView) {
         ProgressDialog dialog = ProgressDialog.show(mContext, "Extracting...", "Please wait", true, true);
         File appFile = new File(mAppInfo[i].sourceDir);
@@ -49,8 +71,7 @@ public class FileUtils {
 
 //                Boolean b = appFile.renameTo(newLocation);
         try {
-            copy(appFile, newLocation);
-            extractUtils.unzip(newLocation.getAbsolutePath(), PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
+            extractUtils.unzip(mAppInfo[i].sourceDir, PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
             String androidManifestPath = PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager())+"/AndroidManifest.xml";
             File xmlFile = new File(androidManifestPath);
             String manifest = extractUtils.getIntents(newLocation.getAbsolutePath()); //method to decompress calls decompressXML
