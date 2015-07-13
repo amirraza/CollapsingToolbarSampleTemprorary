@@ -27,9 +27,9 @@ import java.util.List;
 public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
-
-    public static String AppName, PackageName;
-    public static Drawable AppImage;
+//
+//    public static String AppName, PackageName;
+//    public static Drawable AppImage;
     private ApplicationInfo applicaionInfo;
     String[] t;
 

@@ -1,5 +1,6 @@
 package com.home.amirraza.collapsingtoolbarsample.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -14,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,13 +31,17 @@ import com.home.amirraza.collapsingtoolbarsample.Utils.FileUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
  * Created by Amir on 7/8/2015.
  */
-public class GeneralAdapter extends BaseAdapter {
 
+//http://keepsafe.github.io/2014/11/19/building-a-custom-overflow-menu.html
+//Custom popup menu
+
+public class GeneralAdapter extends BaseAdapter {
     Context context;
     ApplicationInfo applicationInfo[];
     List<PackageInfo> temList;
@@ -89,12 +96,36 @@ public class GeneralAdapter extends BaseAdapter {
         ImageView appImage = (ImageView) convertView.findViewById(R.id.appImage);
         appImage.setImageDrawable(applicationInfo[position].loadIcon(context.getPackageManager()));
 
-        ImageView popupImage = (ImageView) convertView.findViewById(R.id.myPopUpButton);
+        final ImageView popupImage = (ImageView) convertView.findViewById(R.id.myPopUpButton);
         popupImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 PopupMenu popupMenu = new PopupMenu(context,view);
                 popupMenu.getMenuInflater().inflate(R.menu.my_popup_menu, popupMenu.getMenu());
+
+                Object menuHelper;
+                Class[] argTypes;
+                try {
+                    Field fMenuHelper = PopupMenu.class.getDeclaredField("mPopup");
+                    fMenuHelper.setAccessible(true);
+                    menuHelper = fMenuHelper.get(popupMenu);
+                    argTypes = new Class[] { boolean.class };
+                    menuHelper.getClass().getDeclaredMethod("setForceShowIcon", argTypes).invoke(menuHelper, true);
+                } catch (Exception e) {
+                    // Possible exceptions are NoSuchMethodError and NoSuchFieldError
+                    //
+                    // In either case, an exception indicates something is wrong with the reflection code, or the
+                    // structure of the PopupMenu class or its dependencies has changed.
+                    //
+                    // These exceptions should never happen since we're shipping the AppCompat library in our own apk,
+                    // but in the case that they do, we simply can't force icons to display, so log the error and
+                    // show the menu normally.
+
+                    Log.d("TAG", "error forcing menu icons to show", e);
+                    popupMenu.show();
+                    return;
+                }
+
                 popupMenu.show();
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -125,6 +156,7 @@ public class GeneralAdapter extends BaseAdapter {
                         return false;
                     }
                 });
+
             }
         });
         convertView.setOnClickListener(new View.OnClickListener() {
