@@ -111,9 +111,12 @@ public class GeneralAdapter extends BaseAdapter {
                                 break;
                             case R.id.copy:
                                 try {
-                                    FileUtils.getInstance(context).copy(new File(applicationInfo[position].sourceDir),
-                                            new File(Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/APKs/"
-                                                    +appNameString,appNameString+".apk"));
+                                    File fileDirectory = new File(Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/APKs/"
+                                            +appNameString);
+                                    fileDirectory.mkdirs();
+                                    FileUtils.getInstance(context).copy(new File(applicationInfo[position].publicSourceDir),
+                                            new File(fileDirectory,appNameString+".apk"));
+                                    Snackbar.make(view,""+fileDirectory.getAbsolutePath(),Snackbar.LENGTH_SHORT).setAction("Action",null).show();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
