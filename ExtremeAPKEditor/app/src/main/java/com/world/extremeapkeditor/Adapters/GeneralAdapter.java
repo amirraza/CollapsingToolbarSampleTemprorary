@@ -156,17 +156,17 @@ public class GeneralAdapter extends BaseAdapter {
 
             }
         });
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, CheeseDetailActivity.class);
-//                temList = context.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS);
-//                String[] myListArray = temList.toArray(new String[temList.size()]);
-//                Log.d("TAG", "" + temList);
-                intent.putExtra("Name", applicationInfo[position]);
-                context.startActivity(intent);
-            }
-        });
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, CheeseDetailActivity.class);
+////                temList = context.getPackageManager().getInstalledPackages(PackageManager.GET_PROVIDERS);
+////                String[] myListArray = temList.toArray(new String[temList.size()]);
+////                Log.d("TAG", "" + temList);
+//                intent.putExtra("Name", applicationInfo[position]);
+//                context.startActivity(intent);
+//            }
+//        });
         return convertView;
     }
 }

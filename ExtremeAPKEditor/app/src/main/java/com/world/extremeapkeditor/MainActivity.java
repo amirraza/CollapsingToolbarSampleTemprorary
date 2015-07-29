@@ -48,35 +48,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Extreme APK Extractor");
+        toolbar.setLogo(R.drawable.app_icon12);
+//        toolbar.setNavigationIcon(R.drawable.app_icon1);
+        toolbar.setCollapsible(true);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(" Extreme APK Extractor");
+//        ActionBar ab = getSupportActionBar();
+//        ab.setDisplayShowTitleEnabled(true);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+//        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+//        ab.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//
+//        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.abc_action_bar_home_description, R.string.abc_action_bar_home_description)
+//        {
+//            public void onDrawerSlide(View drawerView, float slideOffset)
+//            {
+//                findViewById(R.id.main_content).setTranslationX((drawerView.getWidth()*slideOffset));
+//            }
+//        };
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.abc_action_bar_home_description, R.string.abc_action_bar_home_description)
-        {
-            public void onDrawerSlide(View drawerView, float slideOffset)
-            {
-                findViewById(R.id.main_content).setTranslationX((drawerView.getWidth()*slideOffset));
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+//        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(viewPagerAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -93,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
+//                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
             case R.id.from_file:
