@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Formatter;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -18,6 +19,7 @@ import java.util.zip.ZipOutputStream;
  * Created by abdulazizniazi on 7/1/15.
  */
 public class ExtractUtils {
+    Formatter formatter;
     int BUFFER_SIZE = 1024;
     private String outputXML = "";
     public void unzip(String zipFile, String location) throws IOException {
@@ -108,7 +110,7 @@ public class ExtractUtils {
     }
 
 
-    public String getIntents(String path) {
+    public String getIntents(String path,File[] layouts) {
         try {
             JarFile jf = new JarFile(path);
             InputStream is = jf.getInputStream(jf.getEntry("AndroidManifest.xml"));
@@ -116,6 +118,22 @@ public class ExtractUtils {
             int br = is.read(xml);
             //Tree tr = TrunkFactory.newTree();
             decompressXML(xml);
+
+            formatter = new Formatter(layouts[0].getParentFile().getParentFile().getAbsolutePath()+"/AndroidManifest.xml");
+            formatter.format(outputXML);
+            formatter.close();
+            Log.d("TAGTAG",is.available()+""+layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/")+1));
+            for (File file : layouts){
+                is = jf.getInputStream(jf.getEntry("res/layout/"+file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/")+1)));
+                if (is != null){
+                    xml = new byte[is.available()];
+                    int ar = is.read(xml);
+                    decompressXML(xml);
+                    formatter = new Formatter(file);
+                    formatter.format(outputXML);
+                    formatter.close();
+                }
+            }
             //prt("XML\n"+tr.list());
         } catch (Exception ex) {
             System.out.print("getIntents, ex: " + ex);

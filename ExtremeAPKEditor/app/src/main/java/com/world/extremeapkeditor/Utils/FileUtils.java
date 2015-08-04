@@ -18,7 +18,7 @@ import java.io.OutputStream;
 import java.util.Formatter;
 
 /**
- * Created by Abdul Wahid on 7/5/2015.
+ * Created by Abdul Aziz on 7/5/2015.
  */
 public class FileUtils {
     Context mContext;
@@ -61,22 +61,36 @@ public class FileUtils {
         }
     }
     public void extract(int i, ApplicationInfo[] mAppInfo, View snackBarView) {
-        ProgressDialog dialog = ProgressDialog.show(mContext, "Extracting...", "Please wait", true, true);
+        ProgressDialog dialog = new ProgressDialog(mContext);
+        dialog.setTitle("Extracting");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.show();
+//        show(mContext, "Extracting...", "Please wait", true, true);
         File appFile = new File(mAppInfo[i].sourceDir);
-        String PATH = Environment.getExternalStorageDirectory().getPath() + "/ExtremeApkEditor/";
+        String PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme Apk Editor/";
         File newDirectory = new File(PATH + "/APKs/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
         newDirectory.mkdirs();
-        File newLocation = new File(newDirectory, "app.apk");
+        File newLocation = new File(newDirectory, mAppInfo[i].loadLabel(mContext.getPackageManager())+".apk");
 
 //                Boolean b = appFile.renameTo(newLocation);
         try {
             extractUtils.unzip(mAppInfo[i].sourceDir, PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
             String androidManifestPath = PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager())+"/AndroidManifest.xml";
             File xmlFile = new File(androidManifestPath);
-            String manifest = extractUtils.getIntents(newLocation.getAbsolutePath()); //method to decompress calls decompressXML
-            formatter = new Formatter(xmlFile);
-            formatter.format(manifest);
-            formatter.close();
+
+            File[] layouts = new File(PATH+"/Extracted/"+ mAppInfo[i].loadLabel(mContext.getPackageManager())+"/res/layout").listFiles();
+            String manifest = extractUtils.getIntents(mAppInfo[i].sourceDir,layouts); //method to decompress calls decompressXML
+//            formatter = new Formatter(xmlFile);
+//            formatter.format(manifest);
+//            formatter.close();
+
+//            for (File layoutFile : layouts){
+//               String decrypted =  extractUtils.getIntents(layoutFile.getAbsolutePath());
+//                formatter = new Formatter(layoutFile);
+//                formatter.format(decrypted);
+//                formatter.close();
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();
