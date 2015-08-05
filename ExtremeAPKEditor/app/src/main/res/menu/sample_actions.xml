@@ -4,6 +4,6 @@
     <item
         android:id="@+id/from_file"
         app:showAsAction="always|withText"
-        android:title="From File"
-        android:icon="@drawable/add"/>
+        android:title=""
+        android:icon="@drawable/add_1"/>
 </menu>

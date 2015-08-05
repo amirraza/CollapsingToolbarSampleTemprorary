@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="8dp"
         android:background="@drawable/single_item_bg">
 
 
@@ -46,6 +47,7 @@
             android:singleLine="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:paddingBottom="1dp"
             android:text="asdfasdf" />
 
         <TextView

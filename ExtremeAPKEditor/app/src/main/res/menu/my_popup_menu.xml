@@ -5,22 +5,22 @@
     <item
         android:id="@+id/extract"
         app:showAsAction="always"
-        android:icon="@drawable/extract_icon1"
+        android:icon="@drawable/extract_icon_gray"
         android:title="Extract" />
     <item
         android:id="@+id/copy"
         app:showAsAction="always"
-        android:icon="@drawable/get_icon"
+        android:icon="@drawable/get_icon_gray"
         android:title="Get Apk" />
     <item
         android:id="@+id/share"
         app:showAsAction="always"
-        android:icon="@drawable/share_icon"
+        android:icon="@drawable/share_icon_gray"
         android:title="Share" />
     <item
         android:id="@+id/uninstall"
         android:title="Uninstall"
-        android:icon="@drawable/unnamed"
+        android:icon="@drawable/uninstall_icon_gray"
         app:showAsAction="always"/>
 
 </menu>

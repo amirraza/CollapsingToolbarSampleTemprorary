@@ -48,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Extreme APK Extractor");
-        toolbar.setLogo(R.drawable.app_icon12);
+        toolbar.setTitle("Dex-Code");
+        toolbar.setLogo(R.drawable.app_title_icon);
 //        toolbar.setNavigationIcon(R.drawable.app_icon1);
         toolbar.setCollapsible(true);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" Extreme APK Extractor");
+        getSupportActionBar().setTitle(" Dex-Code");
 //        ActionBar ab = getSupportActionBar();
 //        ab.setDisplayShowTitleEnabled(true);
 

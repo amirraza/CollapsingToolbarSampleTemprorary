@@ -5,6 +5,6 @@
     <item
         android:id="@+id/from_file"
         android:orderInCategory="100"
-        android:title="From File"
+        android:title=""
         app:showAsAction="never" />
 </menu>
