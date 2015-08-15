@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,10 +25,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.world.extremeapkeditor.Adapters.ViewPagerAdapter;
+import com.world.extremeapkeditor.Utils.FileUtils;
 
 import java.io.File;
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public ViewPagerAdapter viewPagerAdapter;
     private DrawerLayout mDrawerLayout;
     public ViewPager viewPager;
+    FloatingActionButton floatingActionButton;
     private AlertDialog.Builder fileDialog;
 
     //    NavigationView navigationView;
@@ -46,14 +50,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+//                intent.putExtra("FORMAT_FILTER","apk");
+                Intent.createChooser(intent, "Choose APK From File");
+                startActivityForResult(intent,0);
+            }
+        });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Dex-Code");
+        toolbar.setTitle(" Extreme APK");
+        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
         toolbar.setLogo(R.drawable.app_title_icon);
 //        toolbar.setNavigationIcon(R.drawable.app_icon1);
         toolbar.setCollapsible(true);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(" Dex-Code");
+        getSupportActionBar().setTitle(" Extreme APK");
 //        ActionBar ab = getSupportActionBar();
 //        ab.setDisplayShowTitleEnabled(true);
 
@@ -102,14 +117,7 @@ public class MainActivity extends AppCompatActivity {
 //                mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
-            case R.id.from_file:
 
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("file/*");
-//                intent.putExtra("FORMAT_FILTER","apk");
-                Intent.createChooser(intent, "Choose APK From File");
-                startActivityForResult(intent,0);
-                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -125,10 +133,26 @@ public class MainActivity extends AppCompatActivity {
                 fileDialog = new  AlertDialog.Builder(this);
                 PackageManager packageManager = getPackageManager();
                 String pathString = path.getPath();
-                PackageInfo packageInfo = packageManager.getPackageArchiveInfo(pathString, 0);
+                final PackageInfo packageInfo = packageManager.getPackageArchiveInfo(pathString, 0);
                 Log.d("PATH",""+packageInfo.packageName);
-
                 View dialogView = View.inflate(this, R.layout.dialog, null);
+                Button extractButton = (Button) dialogView.findViewById(R.id.extract_dialog);
+                Button shareButton = (Button) dialogView.findViewById(R.id.share_dialog);
+                extractButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ApplicationInfo [] appInfo = new ApplicationInfo[1];
+                        appInfo[0] = packageInfo.applicationInfo;
+                        FileUtils.getInstance(MainActivity.this).extract(0, appInfo, view);
+                    }
+                });
+                shareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FileUtils.getInstance(MainActivity.this).share(new File(packageInfo.applicationInfo.publicSourceDir));
+
+                    }
+                });
                 ImageView file_icon  = (ImageView) dialogView.findViewById(R.id.file_icon);
                 TextView file_title = (TextView) dialogView.findViewById(R.id.file_title);
                 TextView file_pakage = (TextView) dialogView.findViewById(R.id.file_package);

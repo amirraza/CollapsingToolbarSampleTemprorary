@@ -25,6 +25,7 @@ public class MyLauncherActivity extends AppCompatActivity implements View.OnClic
         if(view.getId() == R.id.open){
             Intent intent = new Intent(MyLauncherActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

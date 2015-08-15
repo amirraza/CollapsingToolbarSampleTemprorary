@@ -35,7 +35,7 @@ public class UserAppsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_user_apps, container, false);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         listView = (ListView) v.findViewById(R.id.myListView);
-        new MyBackgroundTask(getActivity(),progressBar, listView,2).execute();
+        new MyBackgroundTask(getActivity(),progressBar, listView,1).execute();
         return v;
 
     }

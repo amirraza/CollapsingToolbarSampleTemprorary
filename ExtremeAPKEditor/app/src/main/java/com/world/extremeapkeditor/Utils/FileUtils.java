@@ -7,6 +7,7 @@ import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import java.io.File;
@@ -25,6 +26,7 @@ public class FileUtils {
     Formatter formatter;
     ExtractUtils extractUtils;
     public static FileUtils fileUtils;
+    public String PATH;
 
     public FileUtils(){}
 
@@ -68,7 +70,7 @@ public class FileUtils {
         dialog.show();
 //        show(mContext, "Extracting...", "Please wait", true, true);
         File appFile = new File(mAppInfo[i].sourceDir);
-        String PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme Apk Editor/";
+        PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme Apk Editor/";
         File newDirectory = new File(PATH + "/APKs/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
         newDirectory.mkdirs();
         File newLocation = new File(newDirectory, mAppInfo[i].loadLabel(mContext.getPackageManager())+".apk");
@@ -78,7 +80,7 @@ public class FileUtils {
             extractUtils.unzip(mAppInfo[i].sourceDir, PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
             String androidManifestPath = PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager())+"/AndroidManifest.xml";
             File xmlFile = new File(androidManifestPath);
-
+            Log.d("TAG sourceDir ",""+mAppInfo[i].sourceDir);
             File[] layouts = new File(PATH+"/Extracted/"+ mAppInfo[i].loadLabel(mContext.getPackageManager())+"/res/layout").listFiles();
             String manifest = extractUtils.getIntents(mAppInfo[i].sourceDir,layouts); //method to decompress calls decompressXML
 //            formatter = new Formatter(xmlFile);

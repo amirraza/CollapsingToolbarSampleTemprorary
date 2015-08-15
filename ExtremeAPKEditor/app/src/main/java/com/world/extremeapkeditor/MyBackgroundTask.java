@@ -22,7 +22,7 @@ import java.util.List;
 public class MyBackgroundTask extends AsyncTask<String, String, String> {
     private PackageManager packageManager = null;
     private List<ApplicationInfo> applist = null;
-    private List<PackageInfo> temList=null;
+    private List<PackageInfo> temList = null;
     private ApplicationInfo[] mAppInfo, tempAppInfo;
     private Context context;
     private ProgressBar progressBar;
@@ -43,10 +43,9 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
 
         mAppInfo = applist.toArray(new ApplicationInfo[applist.size()]);
 
-        if (fragmentNumber == 1) {
+        if (fragmentNumber == 0) {
             tempAppInfo = applist.toArray(new ApplicationInfo[applist.size()]);
-        }
-        else if (fragmentNumber == 2) {
+        } else if (fragmentNumber == 1) {
             int count = 0;
             int i = 0;
             for (int a = 0; a < mAppInfo.length; a++) {
@@ -66,8 +65,7 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
                     i++;
                 }
             }
-        }
-        else if (fragmentNumber == 3) {
+        } else if (fragmentNumber == 2) {
             int count = 0;
             int i = 0;
             for (int a = 0; a < mAppInfo.length; a++) {
@@ -91,8 +89,16 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         progressBar.setVisibility(View.INVISIBLE);
-        GeneralAdapter generalAdapter = new GeneralAdapter(context, tempAppInfo);
-        listView.setAdapter(generalAdapter);
+
+//        GeneralAdapter generalAdapter = new GeneralAdapter(context, tempAppInfo);
+        if (fragmentNumber == 0)
+            listView.setAdapter(GeneralAdapter.getAdapter1(context, tempAppInfo));
+        else if (fragmentNumber == 2)
+            listView.setAdapter(GeneralAdapter.getAdapter2(context, tempAppInfo));
+        else
+            listView.setAdapter(GeneralAdapter.getAdapter3(context,tempAppInfo));
+
+
     }
 
 }

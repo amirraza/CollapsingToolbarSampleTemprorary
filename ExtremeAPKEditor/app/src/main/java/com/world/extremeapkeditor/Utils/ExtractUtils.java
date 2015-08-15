@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Formatter;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -22,6 +23,7 @@ public class ExtractUtils {
     Formatter formatter;
     int BUFFER_SIZE = 1024;
     private String outputXML = "";
+
     public void unzip(String zipFile, String location) throws IOException {
         int size;
         byte[] buffer = new byte[BUFFER_SIZE];
@@ -110,35 +112,61 @@ public class ExtractUtils {
     }
 
 
-    public String getIntents(String path,File[] layouts) {
+    public String getIntents(String path, File[] layouts) {
+        FileInputStream fileInputStream = null;
         try {
             JarFile jf = new JarFile(path);
             InputStream is = jf.getInputStream(jf.getEntry("AndroidManifest.xml"));
             byte[] xml = new byte[is.available()];
             int br = is.read(xml);
+            Log.d("TAG2", ">" + layouts[0].getParentFile().getParentFile().getAbsolutePath());
             //Tree tr = TrunkFactory.newTree();
             decompressXML(xml);
-
-            formatter = new Formatter(layouts[0].getParentFile().getParentFile().getAbsolutePath()+"/AndroidManifest.xml");
+            is.close();
+            formatter = new Formatter(layouts[0].getParentFile().getParentFile().getParentFile().getAbsolutePath() + "/AndroidManifest.xml");
             formatter.format(outputXML);
             formatter.close();
-            Log.d("TAGTAG",is.available()+""+layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/")+1));
-            for (File file : layouts){
-                is = jf.getInputStream(jf.getEntry("res/layout/"+file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/")+1)));
-                if (is != null){
-                    xml = new byte[is.available()];
-                    int ar = is.read(xml);
-                    decompressXML(xml);
-                    formatter = new Formatter(file);
-                    formatter.format(outputXML);
-                    formatter.close();
-                }
-            }
+            Log.d("TAGTAG", is.available() + "" + layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/") + 1));
+//            for (int i=0;i<layouts.length;i++){
+//                File file = layouts[i];
+//
+//                try{
+//                    InputStream inputStream= jf.getInputStream(jf.getEntry("res/layout/"+layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/")+1)));
+//                    byte[] fi = new byte[inputStream.available()];
+//                    int ad = inputStream.read(fi);
+//                    decompressXML(fi);
+//                    fileInputStream.close();
+//                }catch (Exception e){
+//                    Log.d("TAG","fileinputStream error",e);
+//                    e.printStackTrace();
+//                }
+//
+////                Log.d("TAGy","file >> "+file);
+////                Log.d("TAGy","layouts length > "+layouts.length);
+////                String pa = layouts[i].getAbsolutePath().substring(layouts[i].getAbsolutePath().lastIndexOf("/")+1);
+////                byte[] f = pa.getBytes(Charset.forName("UTF-8"));
+////                is = jf.getInputStream(jf.getEntry("/res/layout/"+layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/")+1)));
+////                Log.d("TAGy","inputStream iss >> "+is);
+////
+////                if (is != null){
+////                    xml = new byte[is.available()];
+////                    int ar = is.read(xml);
+////                    decompressXML(xml);
+////                    formatter = new Formatter(file);
+////                    formatter.format(outputXML);
+////                    formatter.close();
+////                }
+//            }
             //prt("XML\n"+tr.list());
         } catch (Exception ex) {
             System.out.print("getIntents, ex: " + ex);
             ex.printStackTrace();
         }
+        return outputXML;
+    }
+
+    public String decode(byte[] path) {
+        decompressXML(path);
         return outputXML;
     }
 
@@ -295,7 +323,15 @@ public class ExtractUtils {
         int strLen = arr[strOff + 1] << 8 & 0xff00 | arr[strOff] & 0xff;
         byte[] chars = new byte[strLen];
         for (int ii = 0; ii < strLen; ii++) {
-            chars[ii] = arr[strOff + 2 + ii * 2];
+//            try {
+
+                    chars[ii] = arr[strOff + 2 + ii * 2];
+
+//            } catch (Exception r) {
+//                Log.d("TAG0", "char >" + chars.length + " arr > " + arr.length + " val " + strOff + 2 + ii * 2);
+//                r.printStackTrace();
+//            }
+//            }
         }
         return new String(chars);  // Hack, just use 8 byte chars
     } // end of compXmlStringAt

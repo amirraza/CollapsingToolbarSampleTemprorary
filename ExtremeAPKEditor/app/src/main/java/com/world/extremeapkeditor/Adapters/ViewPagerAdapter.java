@@ -28,10 +28,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             return AllAppsFragment.getInstance();
         else if(position == 1)
             return UserAppsFragment.getInstance();
-        else if(position == 2)
-            return SystemAppsFragment.getInstance();
         else
-            return ApkFragment.getInstance();
+            return SystemAppsFragment.getInstance();
     }
     @Override
     public CharSequence getPageTitle(int position) {

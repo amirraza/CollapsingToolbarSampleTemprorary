@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
+        <activity android:name=".Utils.FileActivity"/>
 
         <activity android:name=".CheeseDetailActivity" />
     </application>
