@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
-        android:padding="10dp"
-        android:textColor="#000"
-        android:textSize="18sp"
+        android:padding="20dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#fff"
+        android:text="Help"
+        android:textStyle="bold"
+        android:textSize="28sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:padding="20dp"
+        android:background="@color/colorPrimary"
+        android:textColor="#ddd"
+        android:text="@string/help"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/xml_text"/>
+        android:id="@+id/xml_text" />
 
 </LinearLayout>

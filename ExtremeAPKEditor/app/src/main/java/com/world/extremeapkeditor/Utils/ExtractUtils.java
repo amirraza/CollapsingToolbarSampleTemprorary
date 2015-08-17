@@ -112,21 +112,21 @@ public class ExtractUtils {
     }
 
 
-    public String getIntents(String path, File[] layouts) {
+    public String getIntents(String path) {
         FileInputStream fileInputStream = null;
         try {
             JarFile jf = new JarFile(path);
             InputStream is = jf.getInputStream(jf.getEntry("AndroidManifest.xml"));
             byte[] xml = new byte[is.available()];
             int br = is.read(xml);
-            Log.d("TAG2", ">" + layouts[0].getParentFile().getParentFile().getAbsolutePath());
+//            Log.d("TAG2", ">" + layouts[0].getParentFile().getParentFile().getAbsolutePath());
             //Tree tr = TrunkFactory.newTree();
             decompressXML(xml);
             is.close();
-            formatter = new Formatter(layouts[0].getParentFile().getParentFile().getParentFile().getAbsolutePath() + "/AndroidManifest.xml");
-            formatter.format(outputXML);
-            formatter.close();
-            Log.d("TAGTAG", is.available() + "" + layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/") + 1));
+//            formatter = new Formatter(layouts[0].getParentFile().getParentFile().getParentFile().getAbsolutePath() + "/AndroidManifest.xml");
+//            formatter.format(outputXML);
+//            formatter.close();
+//            Log.d("TAGTAG", is.available() + "" + layouts[0].getAbsolutePath().substring(layouts[0].getAbsolutePath().lastIndexOf("/") + 1));
 //            for (int i=0;i<layouts.length;i++){
 //                File file = layouts[i];
 //

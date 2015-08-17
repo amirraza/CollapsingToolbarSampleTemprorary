@@ -12,4 +12,20 @@
     the big cheese.</string>
     <string name="checkin">Checkin</string>
     <string name="menu_settings">Menu Setting</string>
+    <string name="help">
+        1.APK extractor helps you extract .apk files.
+        you can select from installed application
+        both system and user apps or you can choose
+        an apk file to extract.
+        Extracted files are available in your root/
+        APK Extractor/ Extracted.\n
+        2.APK extractor also generates backup of installed
+        applications(.apk files), you can also share an
+        application without generating backup.
+        The generated apk files are available in your
+        root/apk extractor/Apks.
+
+    </string>
+    <string name="banner_ad_unit_id">ca-app-pub-6672928832361445/4657007623</string>
+    <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

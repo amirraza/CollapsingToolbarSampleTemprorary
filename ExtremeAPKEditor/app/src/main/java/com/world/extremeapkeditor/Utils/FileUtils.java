@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -23,10 +24,14 @@ import java.util.Formatter;
  */
 public class FileUtils {
     Context mContext;
-    Formatter formatter;
+    View v;
     ExtractUtils extractUtils;
     public static FileUtils fileUtils;
     public String PATH;
+    int i = 0;
+    private ApplicationInfo[] array;
+    private ProgressDialog dialog;
+    private String mPath;
 
     public FileUtils(){}
 
@@ -63,42 +68,15 @@ public class FileUtils {
         }
     }
     public void extract(int i, ApplicationInfo[] mAppInfo, View snackBarView) {
-        ProgressDialog dialog = new ProgressDialog(mContext);
-        dialog.setTitle("Extracting");
-        dialog.setIndeterminate(true);
-        dialog.setCancelable(false);
-        dialog.show();
-//        show(mContext, "Extracting...", "Please wait", true, true);
-        File appFile = new File(mAppInfo[i].sourceDir);
-        PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme Apk Editor/";
-        File newDirectory = new File(PATH + "/APKs/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
-        newDirectory.mkdirs();
-        File newLocation = new File(newDirectory, mAppInfo[i].loadLabel(mContext.getPackageManager())+".apk");
-
-//                Boolean b = appFile.renameTo(newLocation);
-        try {
-            extractUtils.unzip(mAppInfo[i].sourceDir, PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager()));
-            String androidManifestPath = PATH + "/Extracted/" + mAppInfo[i].loadLabel(mContext.getPackageManager())+"/AndroidManifest.xml";
-            File xmlFile = new File(androidManifestPath);
-            Log.d("TAG sourceDir ",""+mAppInfo[i].sourceDir);
-            File[] layouts = new File(PATH+"/Extracted/"+ mAppInfo[i].loadLabel(mContext.getPackageManager())+"/res/layout").listFiles();
-            String manifest = extractUtils.getIntents(mAppInfo[i].sourceDir,layouts); //method to decompress calls decompressXML
-//            formatter = new Formatter(xmlFile);
-//            formatter.format(manifest);
-//            formatter.close();
-
-//            for (File layoutFile : layouts){
-//               String decrypted =  extractUtils.getIntents(layoutFile.getAbsolutePath());
-//                formatter = new Formatter(layoutFile);
-//                formatter.format(decrypted);
-//                formatter.close();
-//            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dialog.dismiss();
-        Snackbar.make(snackBarView,newLocation.getAbsolutePath(),Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        v = snackBarView;
+        array  = new ApplicationInfo[mAppInfo.length];
+        array = mAppInfo;
+        this.i = i;
+        PATH = Environment.getExternalStorageDirectory().getPath() + "/Apk Extractor";
+        mPath = PATH + "/APKs/" + array[i].loadLabel(mContext.getPackageManager())+"/"+array[i].loadLabel(mContext.getPackageManager());
+        dialog = ProgressDialog.show(mContext,"Extracting","Extracting Files ...",true,true);
+        new extractTask().execute((String[]) null);
+//        dialog.dismiss();
 //        Toast.makeText(mContext, " " + newLocation.getAbsolutePath(), Toast.LENGTH_SHORT).show();
     }
 
@@ -115,5 +93,41 @@ public class FileUtils {
         }
         in.close();
         out.close();
+    }
+    public class extractTask extends AsyncTask<String,String,String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+//            File newDirectory = new File(PATH + "/APKs/" + array[i].loadLabel(mContext.getPackageManager()));
+//            newDirectory.mkdirs();
+//            File newLocation = new File(newDirectory, array[i].loadLabel(mContext.getPackageManager())+".apk");
+            File extractedPath = new File(PATH + "/Extracted/" + array[i].loadLabel(mContext.getPackageManager()));
+            extractedPath.mkdirs();
+            try {
+                extractUtils.unzip(array[i].sourceDir, extractedPath.getAbsolutePath());
+//                String androidManifestPath = PATH + "/Extracted/" + array[i].loadLabel(mContext.getPackageManager()) + "/AndroidManifest.xml";
+                Log.d("TAG sourceDir ",""+array[i].sourceDir);
+//                File[] layouts = new File(PATH+"/Extracted/"+ array[i].loadLabel(mContext.getPackageManager())+"/res/layout").listFiles();
+                String manifest = extractUtils.getIntents(array[i].sourceDir);
+                Formatter formatter = new Formatter(extractedPath.getAbsolutePath()+"/AndroidManifest.xml");
+                formatter.format(manifest);
+                formatter.close();
+                 //method to decompress calls decompressXML
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            dialog.dismiss();
+            Snackbar.make(v, "PATH : " + mPath, Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+
+        }
     }
 }

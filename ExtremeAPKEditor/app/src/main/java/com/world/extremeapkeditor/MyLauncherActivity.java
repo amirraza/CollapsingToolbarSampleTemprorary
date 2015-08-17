@@ -11,13 +11,15 @@ import android.widget.LinearLayout;
  * Created by AmirRaza on 7/5/2015.
  */
 public class MyLauncherActivity extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout open;
+    LinearLayout open,help;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         open = (LinearLayout) findViewById(R.id.open);
+        help = (LinearLayout) findViewById(R.id.help_btn);
         open.setOnClickListener(this);
+        help.setOnClickListener(this);
     }
 
     @Override
@@ -26,6 +28,9 @@ public class MyLauncherActivity extends AppCompatActivity implements View.OnClic
             Intent intent = new Intent(MyLauncherActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
+        }else{
+            Intent intent = new Intent(MyLauncherActivity.this,HelpActivity.class);
+            startActivity(intent);
         }
     }
 }
