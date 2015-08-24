@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:ads="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:background="#fff"
     android:layout_width="match_parent"
@@ -13,7 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="40dp"
+            android:background="@drawable/app_icon1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="Extreme APK Editor"/>
+        </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
@@ -33,6 +45,7 @@
         android:layout_below="@id/tabs"
         android:layout_above="@+id/adView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:visibility="gone"
@@ -41,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        app:adUnitId="@string/banner_ad_unit_id_test"/>
+        app:adUnitId="@string/banner_ad_unit_id_test" />
 
     <LinearLayout
         android:id="@+id/fab"
@@ -50,14 +63,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="45dp"
         android:gravity="center"
-        android:layout_above="@id/adView"
         android:background="@drawable/fab">
 
         <ImageView
-            android:layout_width="27dp"
-            android:layout_height="27dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:background="@drawable/add" />
 
     </LinearLayout>
@@ -72,7 +84,6 @@
     <!--android:layout_gravity="bottom|end"-->
     <!--app:elevation="6dp"-->
     <!--app:pressedTranslationZ="12dp" />-->
-
 
 
 </RelativeLayout>

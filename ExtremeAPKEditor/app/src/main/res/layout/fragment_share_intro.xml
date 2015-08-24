@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF9800">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/share_icon_flate_y" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="#fff"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:text="SHARE" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ccffffff"
+            android:textSize="18sp"
+            android:text="Share your play store downloaded Apps and Games with everyone." />
+    </LinearLayout>
+
+</RelativeLayout>

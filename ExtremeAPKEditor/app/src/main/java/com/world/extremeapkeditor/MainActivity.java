@@ -82,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("APK Extractor");
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-        toolbar.setLogo(R.drawable.app_title_icon);
+//        toolbar.setTitle(" APK Extractor");
+//        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+//        toolbar.setLogo(R.drawable.app_icon_invert);
 //        toolbar.setNavigationIcon(R.drawable.app_icon1);
         toolbar.setCollapsible(true);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("APK Extractor");
+//        getSupportActionBar().setTitle("APK Extractor");
 //        ActionBar ab = getSupportActionBar();
 //        ab.setDisplayShowTitleEnabled(true);
 
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 });
                 fileDialog.show();
             } else {
-                Snackbar.make(new View(this), "The file selected is not .apk extension file", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                Snackbar.make(MainActivity.this.findViewById(android.R.id.content).getRootView(), "The file selected is not .apk extension file", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
             }
 
         }

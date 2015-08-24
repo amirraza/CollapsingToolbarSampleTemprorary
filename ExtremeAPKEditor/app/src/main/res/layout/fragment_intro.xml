@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/app_icon_shadow_round_flat" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="#fff"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:text="Extreme APK Extractor" />
+
+        <TextView
+            android:gravity="center"
+            android:padding="15dp"
+            android:textAlignment="gravity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ccffffff"
+            android:textSize="18sp"
+            android:text="Extreme APK Extractor helps you to extract apk files, generate backup and share apks with your friends" />
+    </LinearLayout>
+</RelativeLayout>
