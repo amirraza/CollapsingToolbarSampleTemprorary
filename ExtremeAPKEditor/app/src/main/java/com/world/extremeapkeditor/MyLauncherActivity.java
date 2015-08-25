@@ -27,19 +27,21 @@ public class MyLauncherActivity extends AppCompatActivity implements View.OnClic
     private int COUNT = 1;
     String appPrefs = "ExtremeAPKExtractor";
     SharedPreferences preference;
-
-
-
+    View coverSplash;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preference = getSharedPreferences(appPrefs, Context.MODE_PRIVATE);
+        setContentView(R.layout.activity_launcher);
+        coverSplash = findViewById(R.id.loadingCover);
         if (preference.getString("FirstTime","").equals("done")){
             Intent intent = new Intent(MyLauncherActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
+        }else{
+            coverSplash.setVisibility(View.GONE);
         }
-        setContentView(R.layout.activity_launcher);
+
         mView[0] = findViewById(R.id.v1);
         mView[1] = findViewById(R.id.v2);
         mView[2] = findViewById(R.id.v3);

@@ -79,7 +79,7 @@
             android:id="@+id/extract_dialog"
             android:layout_width="0dp"
             android:gravity="center"
-            android:drawableLeft="@android:drawable/ic_menu_directions"
+            android:drawableLeft="@drawable/extract_icon1"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:paddingLeft="10dp"

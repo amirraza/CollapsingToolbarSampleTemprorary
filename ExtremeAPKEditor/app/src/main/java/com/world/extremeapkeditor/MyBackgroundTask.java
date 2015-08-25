@@ -1,5 +1,6 @@
 package com.world.extremeapkeditor;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -8,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -88,6 +91,34 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+//        ObjectAnimator animator = new ObjectAnimator();
+//        animator.
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.out);
+        animation.setFillEnabled(true);
+        animation.setFillAfter(true);
+//        animation.setDuration(5000);
+        if (!MainActivity.done) {
+            MainActivity.coverView.startAnimation(animation);
+            MainActivity.done = true;
+        }
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                MainActivity.coverView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+//        MainActivity.coverView.setVisibility(View.GONE);
+
         progressBar.setVisibility(View.INVISIBLE);
 
 //        GeneralAdapter generalAdapter = new GeneralAdapter(context, tempAppInfo);
