@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         coverView = findViewById(R.id.loadingCover);
-
         final AdView mAdView = (AdView) findViewById(R.id.adView);
 //        mAdView.setAdSize();
         mAdView.setAdListener(new AdListener() {

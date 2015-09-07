@@ -72,7 +72,7 @@ public class FileUtils {
         array  = new ApplicationInfo[mAppInfo.length];
         array = mAppInfo;
         this.i = i;
-        PATH = Environment.getExternalStorageDirectory().getPath() + "/Apk Extractor";
+        PATH = Environment.getExternalStorageDirectory().getPath() + "/Extreme APK Extractor";
         mPath = PATH + "/APKs/" + array[i].loadLabel(mContext.getPackageManager())+"/"+array[i].loadLabel(mContext.getPackageManager());
         dialog = ProgressDialog.show(mContext,"Extracting","Extracting Files ...",true,true);
         new extractTask().execute((String[]) null);

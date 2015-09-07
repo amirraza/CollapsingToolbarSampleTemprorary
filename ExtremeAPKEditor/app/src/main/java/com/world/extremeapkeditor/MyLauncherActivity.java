@@ -3,11 +3,14 @@ package com.world.extremeapkeditor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -34,6 +37,14 @@ public class MyLauncherActivity extends AppCompatActivity implements View.OnClic
         preference = getSharedPreferences(appPrefs, Context.MODE_PRIVATE);
         setContentView(R.layout.activity_launcher);
         coverSplash = findViewById(R.id.loadingCover);
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.LOLLIPOP){
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+            // Do something for froyo and above versions
+        }
         if (preference.getString("FirstTime","").equals("done")){
             Intent intent = new Intent(MyLauncherActivity.this, MainActivity.class);
             startActivity(intent);

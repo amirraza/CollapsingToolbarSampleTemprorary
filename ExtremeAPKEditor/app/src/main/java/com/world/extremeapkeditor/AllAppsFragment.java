@@ -1,5 +1,7 @@
 package com.world.extremeapkeditor;
 
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -46,6 +49,14 @@ public class AllAppsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_all_apps, container, false);
         progressBar = (ProgressBar) v.findViewById(R.id.progress_bar);
         listView = (ListView) v.findViewById(R.id.myListView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent fileIntent = new Intent(getActivity(),FileActivity.class);
+                fileIntent.putExtra("INFO",((ApplicationInfo)listView.getItemAtPosition(i)).sourceDir);
+                startActivity(fileIntent);
+            }
+        });
         new MyBackgroundTask(getActivity(),progressBar,listView,0).execute();
         return v;
 

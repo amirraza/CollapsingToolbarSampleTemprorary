@@ -93,13 +93,14 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
         super.onPostExecute(s);
 //        ObjectAnimator animator = new ObjectAnimator();
 //        animator.
-        Animation animation = AnimationUtils.loadAnimation(context,R.anim.out);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.out);
         animation.setFillEnabled(true);
         animation.setFillAfter(true);
 //        animation.setDuration(5000);
         if (!MainActivity.done) {
             MainActivity.coverView.startAnimation(animation);
             MainActivity.done = true;
+
         }
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -127,7 +128,7 @@ public class MyBackgroundTask extends AsyncTask<String, String, String> {
         else if (fragmentNumber == 2)
             listView.setAdapter(GeneralAdapter.getAdapter2(context, tempAppInfo));
         else
-            listView.setAdapter(GeneralAdapter.getAdapter3(context,tempAppInfo));
+            listView.setAdapter(GeneralAdapter.getAdapter3(context, tempAppInfo));
 
 
     }
