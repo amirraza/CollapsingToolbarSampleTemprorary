@@ -18,19 +18,21 @@
             android:background="@drawable/app_icon1" />
 
         <TextView
+            android:id="@+id/titleOfActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:textSize="18sp"
             android:textColor="#fff"
-            android:text="Extreme APK Extractor" />
+            android:text="APK Manager - Explore APK" />
     </android.support.v7.widget.Toolbar>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
+        android:scrollbars="none"
         android:id="@+id/file_list" />
 
     <ScrollView
@@ -56,6 +58,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
         android:visibility="gone"
+        android:clickable="true"
         android:gravity="center"
         android:background="#000">
 

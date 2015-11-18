@@ -24,7 +24,7 @@
             android:textColor="#fff"
             android:layout_margin="10dp"
             android:textStyle="bold"
-            android:text="Extreme APK Extractor" />
+            android:text="@string/app_name" />
 
         <TextView
             android:gravity="center"
@@ -34,6 +34,6 @@
             android:layout_height="wrap_content"
             android:textColor="#ccffffff"
             android:textSize="18sp"
-            android:text="Extreme APK Extractor helps you to extract apk files, generate backup and share apks with your friends" />
+            android:text="APK Manager helps you to extract apk files, generate backup and share apks with your friends" />
     </LinearLayout>
 </RelativeLayout>
